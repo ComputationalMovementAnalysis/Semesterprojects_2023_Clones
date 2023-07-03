@@ -1,0 +1,77 @@
+---
+title: "Untitled"
+format: html
+execute: 
+  echo: false
+  message: false
+---
+
+```{r}
+#| message: false
+
+library(tidyverse)
+library(rvest)
+library(kableExtra)
+
+
+htmls <- list.files("PTED ENR FS23-Github URL (for Project Proposal and Project Files)-862011/","*.html",recursive = TRUE, full.names = TRUE)
+htmls2 <- list.files("PTED ENR FS23-Github-Pages URL (of the rendered report)-892939/","*.html",recursive = TRUE, full.names = TRUE)
+
+
+df_1 <- tibble(
+  html_path = htmls, type = "code"
+)
+df_2 <- tibble(
+  html_path = htmls2, type = "report"
+)
+
+df <- rbind(df_1,df_2) %>% 
+  mutate(
+    gruppe = str_extract(html_path, "Gruppe \\d{1,2}"),
+    url = map_chr(html_path, \(x) html_text(read_html(x))) 
+  ) %>% 
+  distinct(gruppe, url, type) %>% 
+  pivot_wider(names_from = type, values_from = url)
+
+
+df$report[df$gruppe == "Gruppe 10"] <- "https://sophiawentkowski.github.io/Semester_project/PaT23_Semester_Project_Group10.html"
+df$report[df$gruppe == "Gruppe 14"]  <- "https://cyrilgeistlich.github.io/cma-project/index.html"
+df$code[df$gruppe == "Gruppe 8"] <- "https://github.com/AntoniaHehli/Semesterproject"
+
+
+
+df1 <- df %>% 
+  mutate(
+    gruppe_int = parse_number(gruppe),
+    gruppe = paste("gruppe", str_pad(gruppe_int, 2, pad = "0"), sep = "_")
+  ) %>% 
+  arrange(gruppe_int)
+
+
+
+write_csv(df1, "df.csv", col_names = FALSE)
+
+df1 <- df1 %>%
+  extract(code, c("domain","username","repo"),"https:\\/\\/(github\\.com)\\/(.+)\\/(.+)",remove = FALSE) %>%
+  extract(report, c("file"), "https:\\/\\/[\\w,-]+.github.io\\/[\\w,-]+\\/([\\w,-,%]+.html)?",remove = FALSE) %>% 
+  mutate(
+    repo = str_remove(repo, "\\.git$"),
+    file = paste0(file.path(gruppe, ifelse(file == "","index.html",file)))
+    # gh_pages = paste0("https://",username,".github.io/",repo)
+  )
+```
+
+
+```{r}
+
+df1 %>% 
+  transmute(gruppe, report, file) %>% 
+  mutate(gruppe = cell_spec(gruppe, "html", link = file)) %>%
+  mutate(report = cell_spec(report, "html", link = report)) %>%
+  select(-file) %>% 
+  kbl("html", escape = FALSE, col.names = c("Report (Fork)", "Report (Original)"))
+
+
+
+```
+
