@@ -15,6 +15,9 @@ library(rvest)
 library(kableExtra)
 
 
+commits <- read_csv("submodule_commits.csv",col_names = c("gruppe","datum")) %>% 
+  mutate(datum = as.POSIXct(datum))
+
 htmls <- list.files("data/PTED ENR FS23-Github URL (for Project Proposal and Project Files)-862011/","*.html",recursive = TRUE, full.names = TRUE)
 htmls2 <- list.files("data/PTED ENR FS23-Github-Pages URL (of the rendered report)-892939/","*.html",recursive = TRUE, full.names = TRUE)
 
@@ -59,18 +62,22 @@ df1 <- df1 %>%
     repo = str_remove(repo, "\\.git$"),
     file = paste0(file.path(gruppe, ifelse(file == "","index.html",file)))
     # gh_pages = paste0("https://",username,".github.io/",repo)
-  )
+  ) %>% 
+  left_join(commits, by = "gruppe")
 ```
 
 
 ```{r}
 
+abgabedatum <- as.POSIXct("2023-07-02 23:59:59",tz = "CEST")
+
 df1 %>% 
-  transmute(gruppe, report, file) %>% 
+  transmute(gruppe, report, file, datum) %>%
   mutate(gruppe = cell_spec(gruppe, "html", link = file)) %>%
   mutate(report = cell_spec(report, "html", link = report)) %>%
+  mutate(datum = cell_spec(datum, color = ifelse(datum > abgabedatum, "red", "green"))) %>% 
   select(-file) %>% 
-  kbl("html", escape = FALSE, col.names = c("Report (Fork)", "Report (Original)"))
+  kbl("html", escape = FALSE, col.names = c("Report (Fork)", "Report (Original)", "Letzer Commit"))
 
 
 
