@@ -40,8 +40,13 @@ df <- rbind(df_1,df_2) %>%
 
 df$report[df$gruppe == "Gruppe 10"] <- "https://sophiawentkowski.github.io/Semester_project/PaT23_Semester_Project_Group10.html"
 df$report[df$gruppe == "Gruppe 14"]  <- "https://cyrilgeistlich.github.io/cma-project/index.html"
-df$code[df$gruppe == "Gruppe 8"] <- "https://github.com/AntoniaHehli/Semesterproject"
-df$code[df$gruppe == "Gruppe 13"] <- "https://github.com/bieriluk/cma_semester_project"
+
+
+df$report %>% cat(sep = "\n")
+
+
+# df$code[df$gruppe == "Gruppe 8"] <- "https://github.com/AntoniaHehli/Semesterproject"
+# df$code[df$gruppe == "Gruppe 13"] <- "https://github.com/bieriluk/cma_semester_project"
 
 
 
@@ -50,8 +55,14 @@ df1 <- df %>%
     gruppe_int = parse_number(gruppe),
     gruppe = paste("gruppe", str_pad(gruppe_int, 2, pad = "0"), sep = "_")
   ) %>% 
-  arrange(gruppe_int)
+  arrange(gruppe_int) %>% 
+  extract(report, c("username","repo"),"https:\\/\\/([\\w,-]+).github.io\\/([\\w,-]+)\\/",remove = FALSE) %>% 
+  mutate(code2 = glue::glue("https://github.com/{username}/{repo}")) %>% 
+  mutate(across(starts_with("code"),str_to_lower))
 
+df1 %>% 
+  filter(!startsWith(code,code2)) %>% 
+  select(code, code2)
 
 
 write_csv(df1, "df.csv", col_names = FALSE)

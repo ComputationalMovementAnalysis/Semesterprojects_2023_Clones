@@ -1,9 +1,6 @@
 [submodule "gruppe_01"]
 	path = gruppe_01
 	url = https://github.com/wahlelis/Semesterproject_FS23_CMA.git
-[submodule "gruppe_02"]
-	path = gruppe_02
-	url = https://github.com/mirjamscheib/Project-template.git
 [submodule "gruppe_03"]
 	path = gruppe_03
 	url = https://github.com/yeluH/FS23_880Project_G3.git
@@ -22,9 +19,6 @@
 [submodule "gruppe_09"]
 	path = gruppe_09
 	url = https://github.com/aiysigner/cma-semesterproject.git
-[submodule "gruppe_10"]
-	path = gruppe_10
-	url = https://github.com/SophiaWentkowski/group-project.git
 [submodule "gruppe_11"]
 	path = gruppe_11
 	url = https://github.com/thomasrempfler/cma-semesterproject
@@ -34,9 +28,3 @@
 [submodule "gruppe_14"]
 	path = gruppe_14
 	url = https://github.com/CyrilGeistlich/cma-project.git
-[submodule "gruppe_08"]
-	path = gruppe_08
-	url = https://github.com/AntoniaHehli/Semesterproject
-[submodule "gruppe_13"]
-	path = gruppe_13
-	url = https://github.com/bieriluk/cma_semester_project/
