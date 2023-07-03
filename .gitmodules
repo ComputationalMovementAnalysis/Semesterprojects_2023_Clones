@@ -37,3 +37,6 @@
 [submodule "gruppe_08"]
 	path = gruppe_08
 	url = https://github.com/AntoniaHehli/Semesterproject
+[submodule "gruppe_13"]
+	path = gruppe_13
+	url = https://github.com/bieriluk/cma_semester_project/
