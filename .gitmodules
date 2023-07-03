@@ -28,3 +28,15 @@
 [submodule "gruppe_14"]
 	path = gruppe_14
 	url = https://github.com/CyrilGeistlich/cma-project.git
+[submodule "gruppe_02"]
+	path = gruppe_02
+	url = https://github.com/mirjamscheib/semester_project
+[submodule "gruppe_08"]
+	path = gruppe_08
+	url = https://github.com/antoniahehli/semesterproject
+[submodule "gruppe_10"]
+	path = gruppe_10
+	url = https://github.com/sophiawentkowski/semester_project
+[submodule "gruppe_13"]
+	path = gruppe_13
+	url = https://github.com/bieriluk/cma_semester_project
