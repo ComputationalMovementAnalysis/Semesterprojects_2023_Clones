@@ -1,5 +1,6 @@
 ---
-title: "Untitled"
+title: "Semester Project Reports"
+subtitle: "FS 2023"
 format: html
 execute: 
   echo: false
@@ -14,8 +15,8 @@ library(rvest)
 library(kableExtra)
 
 
-htmls <- list.files("PTED ENR FS23-Github URL (for Project Proposal and Project Files)-862011/","*.html",recursive = TRUE, full.names = TRUE)
-htmls2 <- list.files("PTED ENR FS23-Github-Pages URL (of the rendered report)-892939/","*.html",recursive = TRUE, full.names = TRUE)
+htmls <- list.files("data/PTED ENR FS23-Github URL (for Project Proposal and Project Files)-862011/","*.html",recursive = TRUE, full.names = TRUE)
+htmls2 <- list.files("data/PTED ENR FS23-Github-Pages URL (of the rendered report)-892939/","*.html",recursive = TRUE, full.names = TRUE)
 
 
 df_1 <- tibble(
