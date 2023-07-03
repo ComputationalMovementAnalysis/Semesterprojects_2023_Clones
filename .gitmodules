@@ -31,9 +31,6 @@
 [submodule "gruppe_12"]
 	path = gruppe_12
 	url = https://github.com/JereHu/cma_project.git
-[submodule "gruppe_13"]
-	path = gruppe_13
-	url = https://github.com/bieriluk/cma_project_proposal_group13.git
 [submodule "gruppe_14"]
 	path = gruppe_14
 	url = https://github.com/CyrilGeistlich/cma-project.git

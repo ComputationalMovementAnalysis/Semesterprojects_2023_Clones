@@ -41,6 +41,7 @@ df <- rbind(df_1,df_2) %>%
 df$report[df$gruppe == "Gruppe 10"] <- "https://sophiawentkowski.github.io/Semester_project/PaT23_Semester_Project_Group10.html"
 df$report[df$gruppe == "Gruppe 14"]  <- "https://cyrilgeistlich.github.io/cma-project/index.html"
 df$code[df$gruppe == "Gruppe 8"] <- "https://github.com/AntoniaHehli/Semesterproject"
+df$code[df$gruppe == "Gruppe 13"] <- "https://github.com/bieriluk/cma_semester_project"
 
 
 
